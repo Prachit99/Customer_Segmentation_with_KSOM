@@ -80,3 +80,27 @@ for i in range(epochs):
         weights=update(weights,dataset[j],w,alpha)
     alpha=0.5*alpha*(i/(i+1))
 final
+
+
+
+"""### Adding the assigned cluster as a column to the dataframe"""
+df['cluster']=final
+df.head()
+
+df.groupby('cluster').mean()
+
+area=np.pi*(X[:,0])**1.2 
+plt.scatter(X[:,0],X[:, 3],s=area,c=final.astype(np.float),alpha=0.5)
+plt.xlabel('Age',fontsize=18)
+plt.ylabel('Income',fontsize=16)
+plt.show()
+
+fig=plt.figure(1,figsize=(8,6))
+plt.clf()
+ax=Axes3D(fig,rect=[0,0,.95,1],elev=48,azim=134)
+plt.cla()
+ax.set_xlabel('Education')
+ax.set_ylabel('Age')
+ax.set_zlabel('Income')
+ax.scatter(X[:,1],X[:,0],X[:,3],c=final.astype(np.float))
+
